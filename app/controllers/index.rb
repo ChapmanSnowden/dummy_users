@@ -1,24 +1,25 @@
+require 'bcrypt'
+
 get '/' do
   # Look in app/views/index.erb
   erb :index
 end
 
-post 'login' do
+post '/login' do
 
   erb :user_landing
 end
 
-get 'create_account' do
+get '/new_user' do
   erb :new_user
 end
 
-
-post 'create_account' do
-
-  redirect to '/'
+post '/new_user' do
+  User.create(params)
+  redirect to '/index'
 end
 
-post 'logout' do
+post '/logout' do
 
   erb :index
 end
