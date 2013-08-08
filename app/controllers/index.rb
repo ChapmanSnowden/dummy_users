@@ -2,24 +2,25 @@ require 'bcrypt'
 
 get '/' do
   # Look in app/views/index.erb
+
   erb :index
+end
+
+get '/logout' do
+
+  session[:user_id] = nil
+  redirect '/'
 end
 
 post '/login' do
-
-  erb :user_landing
+  
+  login
+  redirect "/"
 end
 
-get '/new_user' do
-  erb :new_user
-end
+post '/sign_up' do
 
-post '/new_user' do
-  User.create(params)
-  redirect to '/index'
-end
-
-post '/logout' do
-
-  erb :index
+  @user = User.create(params[:user])
+  login
+  redirect "/"
 end
